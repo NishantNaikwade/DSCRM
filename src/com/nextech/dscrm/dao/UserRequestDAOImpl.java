@@ -26,7 +26,7 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 	public Integer saveUserRequest(UserRequest userRequest) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.saveOrUpdate(userRequest);
+		session.save(userRequest);
 		tx.commit();
 		Serializable id = session.getIdentifier(userRequest);
 		session.close();

@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans  
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.springframework.org/schema/context  
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
 	<context:component-scan base-package="com.nextech.dscrm" />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -21,27 +27,29 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="password" value="nishant245"></property>
 	</bean>
 
-<bean id="sessionFactory"  
-  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
-  <property name="dataSource" ref="dataSource" />  
-  <property name="annotatedClasses">    
-            <list>    
-                <value>com.nextech.dscrm.model.UserRequest</value>    
-            </list>    
-        </property>   
-  <property name="hibernateProperties">  
-   <props>  
-    <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>  
-    <prop key="hibernate.show_sql">true</prop>  
-   </props>  
-  </property>  
- </bean>  
-  
- <bean id="txManager"  
-  class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
-  <property name="sessionFactory" ref="sessionFactory" />  
- </bean>  
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.nextech.dscrm.model.UserRequest</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
 
-	<bean id="userRequestDaoImpl" class="com.nextech.dscrm.dao.UserRequestDAOImpl" />  
- <bean id="userRequestServiceImpl" class="com.nextech.dscrm.services.UserRequestServiceImpl" />  
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="userRequestDaoImpl" class="com.nextech.dscrm.dao.UserRequestDAOImpl" />
+	<bean id="userRequestServiceImpl" class="com.nextech.dscrm.services.UserRequestServiceImpl" />
+	
+	<mvc:annotation-driven />
 </beans>  

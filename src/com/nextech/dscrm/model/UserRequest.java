@@ -1,6 +1,6 @@
 package com.nextech.dscrm.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,9 +27,9 @@ public class UserRequest {
 	@Column(name = "requirementDescription")
 	private String requirementDescription;
 	@Column(name = "requestTime")
-	private Date requestTime;
+	private Timestamp requestTime;
 	@Column(name = "requestUpdateTime")
-	private Date requestUpdateTime;
+	private Timestamp requestUpdateTime;
 
 	public Integer getRequestStatus() {
 		return requestStatus;
@@ -51,11 +51,11 @@ public class UserRequest {
 		return name;
 	}
 
-	public Date getRequestUpdateTime() {
+	public Timestamp getRequestUpdateTime() {
 		return requestUpdateTime;
 	}
 
-	public void setRequestUpdateTime(Date requestUpdateTime) {
+	public void setRequestUpdateTime(Timestamp requestUpdateTime) {
 		this.requestUpdateTime = requestUpdateTime;
 	}
 
@@ -87,11 +87,11 @@ public class UserRequest {
 		this.requirementDescription = requirementDescription;
 	}
 
-	public Date getRequestTime() {
+	public Timestamp getRequestTime() {
 		return requestTime;
 	}
 
-	public void setRequestTime(Date requestTime) {
+	public void setRequestTime(Timestamp requestTime) {
 		this.requestTime = requestTime;
 	}
 
