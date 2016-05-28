@@ -16,4 +16,5 @@ public interface UserRequestDAO {
 	List<UserRequest> findAllUserRequests();
 
 	UserRequest findUserRequestByMobileNumber(String ssn);
+
 }

@@ -1,6 +1,7 @@
 package com.nextech.dscrm.dao;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -14,7 +15,6 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
-
 	@Override
 	public UserRequest findById(Integer id) {
 		Session session = sessionFactory.openSession();
@@ -72,5 +72,6 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		UserRequest userRequest = (UserRequest) session.load(UserRequest.class, mobileNumber);
 		return userRequest;
 	}
+	
 
 }

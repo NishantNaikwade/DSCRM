@@ -1,5 +1,4 @@
 package com.nextech.dscrm.services;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +46,6 @@ public class UserRequestServiceImpl implements UserRequestService{
 		// TODO Auto-generated method stub
 		return userRequestDAOImpl.findUserRequestByMobileNumber(mobileNumber);
 	}
+
 
 }

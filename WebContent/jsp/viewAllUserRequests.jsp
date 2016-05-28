@@ -12,9 +12,31 @@
 <link href="${bootstrapCSS}" rel="stylesheet" />
 <title>View All</title>
 </head>
+<body class=".container-fluid">
+<div class="container myrow-container"></div>
+<div class="panel panel-success"></div>
+<div class="panel-heading">
+<h3 class="panel-title">
+<div align="left"><b>Employees List</b> </div>
+<div align="right"><a href="createEmployee">Add New Employee</a></div>
+</h3>
+</div>
+<div class="panel-body"></div>
+<c:if test="${empty employeeList}">
+There are no Employees
+</c:if>
+<c:if test="${not empty employeeList}"> 
+
+<form action="searchEmployee">
+<div class="row">
+<div class="col-md-6"><div class="col-md-6">Search Employees:</div><div class="col-md-6"> <input type="text" name="searchName" id="searchName"> </div></div>
+<div class="col-md-4"><input class="btn btn-success" type='submit' value='Search'/></div>
+</div>
+</form>
 <body>
 
-	<table class="table table-striped" >
+	<table class="table table-hover table-bordered">
+<thead style="background-color: #bce8f1;">
 		<tr>
 			<th>Id</th>
 			<th>Name</th>
@@ -36,5 +58,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</c:if>
 </body>
 </html>

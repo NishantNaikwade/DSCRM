@@ -12,5 +12,8 @@
 </head>
 <body>
 <h1>Thank you for using our service. Our Executive will contact you shortly.</h1>
+<%
+request.getRequestDispatcher("/viewAllUserRequests").forward(request, response);
+%>
 </body>
 </html>
