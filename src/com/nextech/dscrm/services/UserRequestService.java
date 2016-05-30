@@ -17,5 +17,7 @@ public interface UserRequestService {
     List<UserRequest> findAllUserRequests(); 
      
     UserRequest findUserRequestByMobileNumber(String ssn);
+    public List<UserRequest> findAllUserRequests(String searchName);
+    public long createEmployee(UserRequest employee);
  
 }

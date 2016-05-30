@@ -46,6 +46,16 @@ public class UserRequestServiceImpl implements UserRequestService{
 		// TODO Auto-generated method stub
 		return userRequestDAOImpl.findUserRequestByMobileNumber(mobileNumber);
 	}
+ @Override
+	public List<UserRequest> findAllUserRequests(String userName) {
+		// TODO Auto-generated method stub
+		return userRequestDAOImpl.findAllUserRequests(userName);
+	}
+ @Override
+ public long createEmployee(UserRequest employee) {
+ return userRequestDAOImpl.createEmployee(employee);
+ } 
+	
 
 
 }

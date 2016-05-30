@@ -17,4 +17,7 @@ public interface UserRequestDAO {
 
 	UserRequest findUserRequestByMobileNumber(String ssn);
 
+	List<UserRequest> findAllUserRequests(String employeeName);
+	public long createEmployee(UserRequest employee);
+
 }

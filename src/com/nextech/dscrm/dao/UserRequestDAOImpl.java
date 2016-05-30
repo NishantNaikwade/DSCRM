@@ -1,7 +1,7 @@
 package com.nextech.dscrm.dao;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nextech.dscrm.model.UserRequest;
+import com.nextech.dscrm.util.HibernateUtil;
 
 public class UserRequestDAOImpl implements UserRequestDAO {
 
@@ -71,6 +72,39 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		Session session = sessionFactory.openSession();
 		UserRequest userRequest = (UserRequest) session.load(UserRequest.class, mobileNumber);
 		return userRequest;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserRequest> findAllUserRequests(String employeeName) { 
+	String query = "SELECT e.* FROM UserRequest e WHERE e.name like '%"+ employeeName +"%'";
+	HibernateUtil hibernateUtil = null;
+	List<Object[]> employeeObjects = hibernateUtil.fetchAll(query);
+	List<UserRequest> employees = new ArrayList<UserRequest>();
+	for(Object[] employeeObject: employeeObjects) {
+		UserRequest employee = new UserRequest();
+	int id = (int) employeeObject[0];
+	String name = (String) employeeObject[1];
+	String mobile = (String) employeeObject[2];
+	String email = (String) employeeObject[2];
+	employee.setId(id);
+	employee.setName(name);
+	employee.setMobile(mobile);
+	employee.setEmail(email);
+	employees.add(employee);
+	}
+	System.out.println(employees);
+	return employees;
+	}
+
+	public long createEmployee(UserRequest employee, HibernateUtil hibernateUtil) {
+		// TODO Auto-generated method stub
+		return (Long) hibernateUtil.create(employee);
+	}
+
+	@Override
+	public long createEmployee(UserRequest employee) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 
