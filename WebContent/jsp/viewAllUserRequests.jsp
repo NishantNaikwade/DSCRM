@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="${bootstrapCSS}" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
 <title>View All</title>
 <style type="text/css">
 .myrow-container {
@@ -19,30 +20,29 @@
 }
 </style>
 </head>
-<body>
 <body class=".container-fluid">
 	<div class="container myrow-container">
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<div align="left">
-						<b>Employees List</b>
+						<b>User List</b>
 					</div>
 					<div align="right">
-						<a href="createEmployee">Add New Employee</a>
+						<a href="createUser">Add New User</a>
 					</div>
 				</h3>
 			</div>
 			<div class="panel-body">
-				<c:if test="${empty employeeList}">
-There are no Employees
+				<c:if test="${empty userList}">
+There are no User
 </c:if>
-				<c:if test="${not empty employeeList}">
+				<c:if test="${not empty userList}">
 
-					<form action="searchEmployee">
+					<form action="searchUser">
 						<div class="row">
 							<div class="col-md-6">
-								<div class="col-md-6">Search Employees:</div>
+								<div class="col-md-6">Search User:</div>
 								<div class="col-md-6">
 									<input type="text" name="searchName" id="searchName">
 								</div>
@@ -66,16 +66,16 @@ There are no Employees
 								<th>Request Update Time</th>
 							</tr>
 						</thead>
-						</tbody>
-						<c:forEach var="userRequest" items="${userRequests}">
+						<tbody>
+						<c:forEach items="${viewAllUserRequets}" var="userRequests">
 							<tr>
-								<td>${userRequest.id}</td>
-								<td>${userRequest.name}</td>
-								<td>${userRequest.mobile}</td>
-								<td>${userRequest.email}</td>
-								<td>${userRequest.requirementDescription}</td>
-								<td>${userRequest.requestTime}</td>
-								<td>${userRequest.requestUpdateTime}</td>
+								<th><c:out value="${userRequests.id}"/></th>
+								<th><c:out value="${userRequests.name}"/></th>
+								<th><c:out value="${userRequests.mobile}"/></th>
+								<th><c:out value="${userRequests.email}"/></th>
+								<th><c:out value="${userRequests.requirementDescription}"/></th>
+								<th><c:out value="${userRequests.requestTime}"/></th>
+								<th><c:out value="${userRequests.requestUpdateTime}"/></th>
 							</tr>
 						</c:forEach>
 						</tbody>

@@ -3,6 +3,7 @@ package com.nextech.dscrm.dao;
 import java.util.List;
 
 import com.nextech.dscrm.model.UserRequest;
+import com.nextech.dscrm.util.HibernateUtil;
 
 public interface UserRequestDAO {
 	UserRequest findById(Integer id);
@@ -17,7 +18,10 @@ public interface UserRequestDAO {
 
 	UserRequest findUserRequestByMobileNumber(String ssn);
 
-	List<UserRequest> findAllUserRequests(String employeeName);
-	public long createEmployee(UserRequest employee);
+	List<UserRequest> findAllUserRequests(String userName);
+	public long createUser(UserRequest userRequest);
+
+	List<UserRequest> findAllUserRequests(String userName,
+			HibernateUtil hibernateUtil);
 
 }

@@ -6,18 +6,20 @@ import com.nextech.dscrm.model.UserRequest;
 
 public interface UserRequestService {
 
-	UserRequest findById(int id);
+public	UserRequest findById(int id);
     
-    Integer saveUserRequest(UserRequest userRequest);
+ public    Integer saveUserRequest(UserRequest userRequest);
      
-    Integer updateUserRequest(UserRequest userRequest);
+ public   Integer updateUserRequest(UserRequest userRequest);
      
-    Integer deleteUserRequest(int id);
+  public  Integer deleteUserRequest(int id);
  
-    List<UserRequest> findAllUserRequests(); 
+ public   List<UserRequest> findAllUserRequests(); 
      
-    UserRequest findUserRequestByMobileNumber(String ssn);
-    public List<UserRequest> findAllUserRequests(String searchName);
-    public long createEmployee(UserRequest employee);
+ public   UserRequest findUserRequestByMobileNumber(String ssn);
+    
+  public   List<UserRequest> findAllUserRequests(String userName);
+    
+    public long createUser(UserRequest userRequest);
  
 }

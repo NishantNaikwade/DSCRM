@@ -34,24 +34,32 @@ Employee Details
 <div class="form-group">
 <div class="control-label col-xs-3"> <form:label path="name" >Name</form:label> </div>
 <div class="col-xs-6">
-<form:hidden path="id" value="${employeeObject.id}"/>
-<form:input cssClass="form-control" path="name" value="${employeeObject.name}"/>
+<form:hidden path="id" value="${userObject.id}"/>
+<form:input cssClass="form-control" path="name" value="${userObject.name}"/>
 </div>
 </div>
 
 <div class="form-group">
 <form:label path="email" cssClass="control-label col-xs-3">Email</form:label>
 <div class="col-xs-6">
-<form:input cssClass="form-control" path="email" value="${employeeObject.email}"/>
+<form:input cssClass="form-control" path="email" value="${userObject.email}"/>
 </div>
 </div>
 
 <div class="form-group">
 <div class="control-label col-xs-3"><form:label path="mobile">Mobile</form:label></div>
 <div class="col-xs-6">
-<form:input cssClass="form-control" path="mobile" value="${employeeObject.mobile}"/>
+<form:input cssClass="form-control" path="mobile" value="${userObject.mobile}"/>
 </div>
 </div>
+
+<div class="form-group">
+<div class="control-label col-xs-3"><form:label path="mobile">Description</form:label></div>
+<div class="col-xs-6">
+<form:input cssClass="form-control" path="requirementDescription" value="${userObject.requirementDescription}"/>
+</div>
+</div>
+
 
 <div class="form-group">
 <div class="row">

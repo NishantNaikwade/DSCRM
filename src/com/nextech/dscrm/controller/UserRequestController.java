@@ -16,45 +16,59 @@ import com.nextech.dscrm.services.UserRequestServiceImpl;
 
 @Controller
 public class UserRequestController {
-	private static final Logger logger = Logger.getLogger(UserRequestController.class);
+	private static final Logger logger = Logger
+			.getLogger(UserRequestController.class);
 
-	@Autowired 
+	public UserRequestController() {
+		System.out.println("UserRequestController()");
+	}
+
+	@Autowired
 	UserRequestServiceImpl userRequestServiceImpl;
-	
+
 	@RequestMapping("/userRequest")
-	public String userRequest(ModelMap modelMap){
+	public String userRequest(ModelMap modelMap) {
 		UserRequest userRequest = new UserRequest();
 		modelMap.addAttribute("userRequest", userRequest);
 		return "userRequest";
 	}
+
 	@RequestMapping("/saveUserRequest")
-	public String saveUserRequest(@ModelAttribute("userRequest")UserRequest userRequest){
-//		UserRequest userRequest = (UserRequest) modelMap.get("userRequest");
+	public String saveUserRequest(
+			@ModelAttribute("userRequest") UserRequest userRequest) {
+		// UserRequest userRequest = (UserRequest) modelMap.get("userRequest");
 		userRequestServiceImpl.saveUserRequest(userRequest);
 		return "saveUserRequest";
 	}
-	
+
 	@RequestMapping("/viewAllUserRequests")
-	public String viewAllUserRequests(ModelMap modelMap){
-		
-		modelMap.addAttribute("userRequests", userRequestServiceImpl.findAllUserRequests());
+	public String viewAllUserRequests(ModelMap modelMap) {
+
+		modelMap.addAttribute("userRequests",
+				userRequestServiceImpl.findAllUserRequests());
 		return "viewAllUserRequests";
 	}
-	@RequestMapping("deleteUserRequest")
+
+	@RequestMapping("/deleteUserRequest")
 	public ModelAndView deleteUserRequest(@RequestParam long id) {
-	logger.info("Deleting the Employee. Id : "+id);
-	userRequestServiceImpl.deleteUserRequest((int) id);
-	return new ModelAndView("redirect:findAllUserRequests");
+		logger.info("Deleting the UserRequest. Id : " + id);
+		userRequestServiceImpl.deleteUserRequest((int) id);
+		return new ModelAndView("redirect:findAllUserRequests");
 	}
-	@RequestMapping("searchEmployee")
-	public ModelAndView searchEmployee(@RequestParam("searchName") String searchName) { 
-	logger.info("Searching the UserRequest. UserRequest Names: "+searchName);
-	List<UserRequest> employeeList = userRequestServiceImpl.findAllUserRequests(searchName);
-	return new ModelAndView("employeeList", "employeeList", employeeList); 
+
+	@RequestMapping("/searchUser")
+	public ModelAndView searchUser(@RequestParam("searchName") String searchName) {
+		logger.info("Searching the UserRequest.UserRequest Names: "
+				+ searchName);
+		List<UserRequest> userList = userRequestServiceImpl
+				.findAllUserRequests(searchName);
+		return new ModelAndView("userList", "userList", userList);
 	}
-	@RequestMapping("createEmployee")
-	public ModelAndView createEmployee(@ModelAttribute UserRequest employee) {
-	logger.info("Creating UserRequest. Data: "+employee);
-	return new ModelAndView("employeeForm");
+
+	@RequestMapping("/createUser")
+	public ModelAndView createUser(@ModelAttribute UserRequest userRequest) {
+		logger.info("Creating UserRequest. Data: " + userRequest);
+		return new ModelAndView("userRequest");
 	}
+
 }
