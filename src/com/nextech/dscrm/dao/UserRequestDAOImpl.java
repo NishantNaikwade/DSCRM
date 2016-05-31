@@ -16,6 +16,7 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	private HibernateUtil hibernateUtil;
 	@Override
 	public UserRequest findById(Integer id) {
 		Session session = sessionFactory.openSession();
@@ -62,9 +63,9 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 	public List<UserRequest> findAllUserRequests() {
 		Session session = sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
-		List<UserRequest> employeeList = session.createQuery("from UserRequest").list();
+		List<UserRequest> userList = session.createQuery("from UserRequest").list();
 		session.close();
-		return employeeList;
+		return userList;
 	}
 
 	@Override
@@ -75,37 +76,35 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserRequest> findAllUserRequests(String employeeName) { 
-	String query = "SELECT e.* FROM UserRequest e WHERE e.name like '%"+ employeeName +"%'";
-	HibernateUtil hibernateUtil = null;
-	List<Object[]> employeeObjects = hibernateUtil.fetchAll(query);
-	List<UserRequest> employees = new ArrayList<UserRequest>();
-	for(Object[] employeeObject: employeeObjects) {
-		UserRequest employee = new UserRequest();
-	int id = (int) employeeObject[0];
-	String name = (String) employeeObject[1];
-	String mobile = (String) employeeObject[2];
-	String email = (String) employeeObject[2];
-	employee.setId(id);
-	employee.setName(name);
-	employee.setMobile(mobile);
-	employee.setEmail(email);
-	employees.add(employee);
+	public List<UserRequest> findAllUserRequests(String userName) { 
+	String query = "SELECT * FROM UserRequest  WHERE name like '%"+ userName +"%'";
+	List<Object[]> userObjects = hibernateUtil.fetchAll(query);
+	List<UserRequest> userRequest = new ArrayList<UserRequest>();
+	for(Object[] userObject: userObjects) {
+		UserRequest user = new UserRequest();
+	int id = (int)  userObject[0];
+	String name = (String)  userObject[1];
+	String mobile = (String)  userObject[2];
+	String email = (String)  userObject[3];
+	user.setId(id);
+	user.setName(name);
+	user.setMobile(mobile);
+	user.setEmail(email);
+	userRequest.add(user);
 	}
-	System.out.println(employees);
-	return employees;
-	}
-
-	public long createEmployee(UserRequest employee, HibernateUtil hibernateUtil) {
-		// TODO Auto-generated method stub
-		return (Long) hibernateUtil.create(employee);
+	System.out.println(userRequest);
+	return userRequest;
 	}
 
 	@Override
-	public long createEmployee(UserRequest employee) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long createUser(UserRequest userRequest) { 
+	return (Long) hibernateUtil.create(userRequest);
 	}
-	
 
+	@Override
+	public List<UserRequest> findAllUserRequests(String userName,
+			HibernateUtil hibernateUtil) {
+		// TODO Auto-generated method stub
+		return null;
+	} 
 }

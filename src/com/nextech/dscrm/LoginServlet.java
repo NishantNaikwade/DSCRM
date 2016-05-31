@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("Inside doPost login");
 		doGet(request, response);
-		request.getRequestDispatcher("/userRequest").forward(request, response);
+		request.getRequestDispatcher("/viewAllUserRequests").forward(request, response);
 	}
 
 }

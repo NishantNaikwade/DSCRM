@@ -52,8 +52,8 @@ public class UserRequestServiceImpl implements UserRequestService{
 		return userRequestDAOImpl.findAllUserRequests(userName);
 	}
  @Override
- public long createEmployee(UserRequest employee) {
- return userRequestDAOImpl.createEmployee(employee);
+ public long createUser(UserRequest userRequest) {
+ return userRequestDAOImpl.createUser(userRequest);
  } 
 	
 
