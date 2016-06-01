@@ -88,25 +88,25 @@ function submitEmployeeForm() {
 var name = $('#name').val().trim();
 var email = $('#email').val();
 var mobile = $('#mobile').val();
-if(name.length ==0) {
-alert('Please enter name');
-$('#name').focus();
-return false;
-}
-
-if(mobile <= 0) {
-alert('Please enter proper number');
-$('#age').focus();
-return false;
-}
-
-if(email <= 0) {
-alert('Please enter proper salary');
-$('#salary').focus();
-return false;
-}
-return true;
-}; 
+var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+if (name != '' && email != '' && mobile != '') {
+	if (email.match(emailReg)) {
+	if (contact.length == 10) {
+	alert("All type of validation has done on OnSubmit event.");
+	return true;
+	} else {
+	alert("The Contact No. must be at least 10 digit long!");
+	return false;
+	}
+	} else {
+	alert("Invalid Email Address...!!!");
+	return false;
+	}
+	} else {
+	alert("All fields are required.....!");
+	return false;
+	}
+	}
 </script>
 </body>
 </html>

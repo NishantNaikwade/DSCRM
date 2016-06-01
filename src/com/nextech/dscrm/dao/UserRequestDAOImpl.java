@@ -17,6 +17,7 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	private HibernateUtil hibernateUtil;
+	
 	@Override
 	public UserRequest findById(Integer id) {
 		Session session = sessionFactory.openSession();

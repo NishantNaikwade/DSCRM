@@ -70,5 +70,11 @@ public class UserRequestController {
 		logger.info("Creating UserRequest. Data: " + userRequest);
 		return new ModelAndView("userRequest");
 	}
-
+	@RequestMapping(value = {"findAllUserRequests", "/"})
+	public ModelAndView findAllUserRequests() {
+	logger.info("Getting the all UserRequest.");
+	List<UserRequest> userList = userRequestServiceImpl.findAllUserRequests();
+	return new ModelAndView("userList", "userList", userList);
+	}
+	
 }
