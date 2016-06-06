@@ -1,5 +1,6 @@
 package com.nextech.dscrm.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.jboss.logging.Logger;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.nextech.dscrm.model.UserRequest;
 import com.nextech.dscrm.services.UserRequestServiceImpl;
 
@@ -25,7 +25,7 @@ public class UserRequestController {
 
 	@Autowired
 	UserRequestServiceImpl userRequestServiceImpl;
-
+	
 	@RequestMapping("/userRequest")
 	public String userRequest(ModelMap modelMap) {
 		UserRequest userRequest = new UserRequest();
@@ -43,9 +43,11 @@ public class UserRequestController {
 
 	@RequestMapping("/viewAllUserRequests")
 	public String viewAllUserRequests(ModelMap modelMap) {
-
-		modelMap.addAttribute("userRequests",
-				userRequestServiceImpl.findAllUserRequests());
+		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
+				.findAllUserRequests();
+		System.out.println("viewAllUserRequests size : "
+				+ viewAllUserRequests.size());
+		modelMap.addAttribute("userRequests", viewAllUserRequests);
 		return "viewAllUserRequests";
 	}
 
@@ -57,12 +59,42 @@ public class UserRequestController {
 	}
 
 	@RequestMapping("/searchUser")
-	public ModelAndView searchUser(@RequestParam("searchName") String searchName) {
-		logger.info("Searching the UserRequest.UserRequest Names: "
+	public String searchUser(@RequestParam("searchName") String searchName,
+			ModelMap modelMap) {
+		logger.info("Searching the UserRequest.UserRequest Names : "
 				+ searchName);
-		List<UserRequest> userList = userRequestServiceImpl
-				.findAllUserRequests(searchName);
-		return new ModelAndView("userList", "userList", userList);
+		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
+				.findAllUserRequestsForUserName(searchName);
+		System.out.println("viewAllUserRequests size : "
+				+ viewAllUserRequests.size());
+		modelMap.addAttribute("userRequests", viewAllUserRequests);
+		return "viewAllUserRequests";
+	}
+
+	@RequestMapping("/searchUserByTime")
+	public String searchUserByTime(
+			@RequestParam("searchTime") Timestamp searchTime, ModelMap modelMap) {
+		logger.info("Searching the UserRequest.UserRequest Times: "
+				+ searchTime);
+		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
+				.findAllUserRequsetForTime(searchTime);
+		System.out.println("viewAllUserRequests size : "
+				+ viewAllUserRequests.size());
+		modelMap.addAttribute("userRequests", viewAllUserRequests);
+		return "viewAllUserRequests";
+	}
+
+	@RequestMapping("/searchUserByMobile")
+	public String searchUserByMobile(
+			@RequestParam("searchMobile") String searchMobile, ModelMap modelMap) {
+		logger.info("Searching the UserRequest.UserRequest Mobiles : "
+				+ searchMobile);
+		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
+				.findUserRequestByMobileNumber(searchMobile);
+		System.out.println("viewAllUserRequests size : "
+				+ viewAllUserRequests.size());
+		modelMap.addAttribute("userRequests", viewAllUserRequests);
+		return "viewAllUserRequests";
 	}
 
 	@RequestMapping("/createUser")
@@ -70,11 +102,6 @@ public class UserRequestController {
 		logger.info("Creating UserRequest. Data: " + userRequest);
 		return new ModelAndView("userRequest");
 	}
-	@RequestMapping(value = {"findAllUserRequests", "/"})
-	public ModelAndView findAllUserRequests() {
-	logger.info("Getting the all UserRequest.");
-	List<UserRequest> userList = userRequestServiceImpl.findAllUserRequests();
-	return new ModelAndView("userList", "userList", userList);
-	}
 	
+
 }

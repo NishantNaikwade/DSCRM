@@ -1,6 +1,7 @@
 package com.nextech.dscrm.dao;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	private HibernateUtil hibernateUtil;
+	public HibernateUtil hibernateUtil;
 	
 	@Override
 	public UserRequest findById(Integer id) {
@@ -69,43 +70,40 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		return userList;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public UserRequest findUserRequestByMobileNumber(String mobileNumber) {
-		Session session = sessionFactory.openSession();
-		UserRequest userRequest = (UserRequest) session.load(UserRequest.class, mobileNumber);
-		return userRequest;
+	public List<UserRequest> findUserRequestByMobileNumber(String mobileNumber) { 
+	String query = "SELECT * FROM UserRequest  WHERE mobile= '"+ mobileNumber +"'";
+	System.out.println("Searching for Mobile : " + mobileNumber);
+	Session session = sessionFactory.openSession();
+	List<UserRequest> userList = session.createQuery("from UserRequest WHERE mobile= '"+ mobileNumber +"'").list();
+	System.out.println("userlist size : " + userList.size());
+	return userList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserRequest> findAllUserRequestsForUserName(String userName) { 
+	String query = "SELECT * FROM UserRequest  WHERE name like '%"+ userName +"%'";
+	System.out.println("Searching for Name : " + userName);
+	Session session = sessionFactory.openSession();
+	List<UserRequest> userList = session.createQuery("from UserRequest WHERE name like '%"+ userName +"%'").list();
+	System.out.println("userlist size : " + userList.size());
+	return userList;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserRequest> findAllUserRequests(String userName) { 
-	String query = "SELECT * FROM UserRequest  WHERE name like '%"+ userName +"%'";
-	List<Object[]> userObjects = hibernateUtil.fetchAll(query);
-	List<UserRequest> userRequest = new ArrayList<UserRequest>();
-	for(Object[] userObject: userObjects) {
-		UserRequest user = new UserRequest();
-	int id = (int)  userObject[0];
-	String name = (String)  userObject[1];
-	String mobile = (String)  userObject[2];
-	String email = (String)  userObject[3];
-	user.setId(id);
-	user.setName(name);
-	user.setMobile(mobile);
-	user.setEmail(email);
-	userRequest.add(user);
-	}
-	System.out.println(userRequest);
-	return userRequest;
+	public List<UserRequest> findAllUserRequsetForTime(Timestamp userTime){
+		String query="Select * from UserRequest where requesttime='"+userTime+"'";
+		System.out.println("Searching for Time:"+userTime);
+		Session session=sessionFactory.openSession();
+		List<UserRequest> userList=session.createQuery("from UserRequest Where requesttime= '"+userTime+"'").list();
+		System.out.println("userlist size : " + userList.size());
+		return userList;
 	}
 
 	@Override
 	public long createUser(UserRequest userRequest) { 
 	return (Long) hibernateUtil.create(userRequest);
 	}
-
-	@Override
-	public List<UserRequest> findAllUserRequests(String userName,
-			HibernateUtil hibernateUtil) {
-		// TODO Auto-generated method stub
-		return null;
-	} 
 }

@@ -1,4 +1,6 @@
 package com.nextech.dscrm.services;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nextech.dscrm.dao.UserRequestDAOImpl;
 import com.nextech.dscrm.model.UserRequest;
 
-public class UserRequestServiceImpl implements UserRequestService{
+public class UserRequestServiceImpl implements UserRequestService {
+	public UserRequestServiceImpl() {
+		System.out.println("UserRequestServiceImpl()");
+	}
 
 	@Autowired
 	UserRequestDAOImpl userRequestDAOImpl;
-	
+
 	@Override
 	public UserRequest findById(int id) {
 		// TODO Auto-generated method stub
@@ -42,20 +47,26 @@ public class UserRequestServiceImpl implements UserRequestService{
 	}
 
 	@Override
-	public UserRequest findUserRequestByMobileNumber(String mobileNumber) {
+	public List<UserRequest> findUserRequestByMobileNumber(String mobileNumber) {
 		// TODO Auto-generated method stub
 		return userRequestDAOImpl.findUserRequestByMobileNumber(mobileNumber);
 	}
- @Override
-	public List<UserRequest> findAllUserRequests(String userName) {
-		// TODO Auto-generated method stub
-		return userRequestDAOImpl.findAllUserRequests(userName);
-	}
- @Override
- public long createUser(UserRequest userRequest) {
- return userRequestDAOImpl.createUser(userRequest);
- } 
-	
 
+	@Override
+	public List<UserRequest> findAllUserRequestsForUserName(String userName) {
+		// TODO Auto-generated method stub
+		return userRequestDAOImpl.findAllUserRequestsForUserName(userName);
+	}
+
+	@Override
+	public List<UserRequest> findAllUserRequsetForTime(Timestamp userTime) {
+		// TODO Auto-generated method stub
+		return userRequestDAOImpl.findAllUserRequsetForTime(userTime);
+	}
+
+	@Override
+	public long createUser(UserRequest userRequest) {
+		return userRequestDAOImpl.createUser(userRequest);
+	}
 
 }

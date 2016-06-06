@@ -1,0 +1,30 @@
+package com.nextech.dscrm.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.nextech.dscrm.model.LoginUserRequest;
+import com.nextech.dscrm.services.LoginUserRequestServiceImpl;
+
+public class LoginUserRequestController {
+	@Autowired
+	LoginUserRequestServiceImpl loginUserRequestServiceImpl;
+
+	@RequestMapping("/loginUserRequest")
+	public String loginUserRequest(ModelMap modelMap) {
+		LoginUserRequest loginUserRequest = new LoginUserRequest();
+		modelMap.addAttribute("loginUserRequest", loginUserRequest);
+		return "loginUserRequest";
+	}
+
+	@RequestMapping("/loginSaveUserRequest")
+	public String loginSaveUserRequest(
+			@ModelAttribute("loginUserRequest") LoginUserRequest LoginUserRequest) {
+
+		loginUserRequestServiceImpl.loginSaveUserRequest(LoginUserRequest);
+		return "loginSaveUserRequest";
+	}
+
+}

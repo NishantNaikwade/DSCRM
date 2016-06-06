@@ -94,18 +94,6 @@ public class UserRequest {
 	public void setRequestTime(Timestamp requestTime) {
 		this.requestTime = requestTime;
 	}
-	@Override
-	public String toString() {
-	return "UserRequest{" +
-	"id=" + id +
-	", name='" + name + '\'' +
-	", email=" + email +
-	", mobile=" + mobile +
-	  ",requestTime="+ requestTime +
-	  ",requirementDescription="+ requirementDescription +
-	  ",requestStatus="+ requestStatus +
-	  
-	'}';
-	}
+	
 
 }

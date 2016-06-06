@@ -1,9 +1,9 @@
 package com.nextech.dscrm.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.nextech.dscrm.model.UserRequest;
-import com.nextech.dscrm.util.HibernateUtil;
 
 public interface UserRequestDAO {
 	UserRequest findById(Integer id);
@@ -16,12 +16,11 @@ public interface UserRequestDAO {
 
 	List<UserRequest> findAllUserRequests();
 
-	UserRequest findUserRequestByMobileNumber(String ssn);
+	List<UserRequest> findUserRequestByMobileNumber(String mobileNumber);
 
-	List<UserRequest> findAllUserRequests(String userName);
+	List<UserRequest> findAllUserRequestsForUserName(String userName);
+
+	List<UserRequest> findAllUserRequsetForTime(Timestamp userTime);
+
 	public long createUser(UserRequest userRequest);
-
-	List<UserRequest> findAllUserRequests(String userName,
-			HibernateUtil hibernateUtil);
-
 }
