@@ -12,7 +12,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="${bootstrapCSS}" rel="stylesheet" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <title>View All</title>
 <style type="text/css">
 .myrow-container {
@@ -24,68 +25,84 @@
 	<div class="container myrow-container">
 		<div class="panel panel-success">
 			<div class="panel-heading">
-				<h3 class="panel-title">
+				<div class="panel-title">
 					<div align="left">
 						<b>User List</b>
 					</div>
 					<div align="right">
 						<a href="createUser">Add New User</a>
 					</div>
-				</h3>
+				</div>
+			</div>
+			</div>
 			</div>
 			<div class="panel-body">
-				<c:if test="${empty userList}">
-There are no User
-</c:if>
-				<c:if test="${not empty userList}">
-
-					<form action="searchUser">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="col-md-6">Search User:</div>
-								<div class="col-md-6">
-									<input type="text" name="searchName" id="searchName">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<input class="btn btn-success" type='submit' value='Search' />
-							</div>
+				<form action="searchUserByMobile">
+					<div class="row">
+						<div class="col-md-6">
+							Mobile Number:<input type="text" name="searchMobile"
+								id="searchMobile">
 						</div>
+					</div>   
 					</form>
+                     </div>         
+					<div class="panel-body">
+						<form action="searchUser">
+							<div class="row">
+								<div class="col-md-6">
+									Name:<input type="text" name="searchName" id="searchName">
+								</div>
+								</div>
+							  </form> 
+                              </div>
+							<div align="right">
+								<div class="col-md-4">
+									<input class="btn btn-success" type='submit' value='Search' />
+                                   </div>
+                                    </div>
+                                 
+                              
+                                                    
+				<c:if test="${empty userRequests}">
+                    There are no User
+                </c:if>
+				<c:if test="${not empty userRequests}">
 
-					<table class="table table-hover table-bordered">
-						<thead style="background-color: #bce8f1;">
+					<form action="viewAllUserRequests">
 
-							<tr>
-								<th>Id</th>
-								<th>Name</th>
-								<th>Mobile</th>
-								<th>Email</th>
-								<th>Description</th>
-								<th>Request Time</th>
-								<th>Request Update Time</th>
-							</tr>
-						</thead>
-						<tbody>
-						<c:forEach items="${viewAllUserRequets}" var="userRequests">
-							<tr>
-								<th><c:out value="${userRequests.id}"/></th>
-								<th><c:out value="${userRequests.name}"/></th>
-								<th><c:out value="${userRequests.mobile}"/></th>
-								<th><c:out value="${userRequests.email}"/></th>
-								<th><c:out value="${userRequests.requirementDescription}"/></th>
-								<th><c:out value="${userRequests.requestTime}"/></th>
-								<th><c:out value="${userRequests.requestUpdateTime}"/></th>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-				</c:if>
-			</div>
-		</div>
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+						<table class="table table-hover table-bordered">
+							<thead style="background-color: #bce8f1;">
+
+								<tr>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Mobile</th>
+									<th>Email</th>
+									<th>Description</th>
+									<th>Request Time</th>
+									<th>Request Update Time</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${userRequests}" var="userRequests">
+									<tr>
+										<th><c:out value="${userRequests.id}" /></th>
+										<th><c:out value="${userRequests.name}" /></th>
+										<th><c:out value="${userRequests.mobile}" /></th>
+										<th><c:out value="${userRequests.email}" /></th>
+										<th><c:out value="${userRequests.requirementDescription}" /></th>
+										<th><c:out value="${userRequests.requestTime}" /></th>
+										<th><c:out value="${userRequests.requestUpdateTime}" /></th>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</form>	
+				</c:if>				
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
