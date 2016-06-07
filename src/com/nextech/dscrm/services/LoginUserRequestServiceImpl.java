@@ -7,6 +7,10 @@ import com.nextech.dscrm.dao.LoginUserRequestDAOImpl;
 import com.nextech.dscrm.model.LoginUserRequest;
 
 public class LoginUserRequestServiceImpl implements LoginUserRequestService {
+	public LoginUserRequestServiceImpl() {
+		System.out.println("loginUserRequestServiceImpl");
+	}
+
 	@Autowired
 	LoginUserRequestDAOImpl loginUserRequestDAOImpl;
 

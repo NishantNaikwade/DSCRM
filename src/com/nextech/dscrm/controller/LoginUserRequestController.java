@@ -10,6 +10,10 @@ import com.nextech.dscrm.model.LoginUserRequest;
 import com.nextech.dscrm.services.LoginUserRequestServiceImpl;
 @Controller
 public class LoginUserRequestController {
+	public LoginUserRequestController() {
+		System.out.println("loginUserRequestController");
+	}
+
 	@Autowired
 	LoginUserRequestServiceImpl loginUserRequestServiceImpl;
 
@@ -22,9 +26,9 @@ public class LoginUserRequestController {
 
 	@RequestMapping("/loginSaveUserRequest")
 	public String loginSaveUserRequest(
-			@ModelAttribute("loginUserRequest") LoginUserRequest LoginUserRequest) {
+			@ModelAttribute("loginUserRequest") LoginUserRequest loginUserRequest) {
 
-		loginUserRequestServiceImpl.loginSaveUserRequest(LoginUserRequest);
+		loginUserRequestServiceImpl.loginSaveUserRequest(loginUserRequest);
 		return "loginSaveUserRequest";
 	}
 

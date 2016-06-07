@@ -16,6 +16,7 @@ public interface UserRequestService {
 	public Integer deleteUserRequest(int id);
 
 	public List<UserRequest> findAllUserRequests();
+	
 	public List<UserRequest> findUserRequestByMobileNumber(String mobileNumber);
 
 	public List<UserRequest> findAllUserRequestsForUserName(String userName);

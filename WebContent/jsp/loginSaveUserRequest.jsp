@@ -11,6 +11,6 @@
 <title>Thank You</title>
 </head>
 <body>
-<h1>Login SucessFully</h1>
+<h1>Login SuccessFully</h1>
 </body>
 </html>
