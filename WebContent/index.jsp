@@ -15,19 +15,19 @@ pageEncoding="UTF-8" %>
 <body>
     <h1>DSCRM</h1>
 
-<form:form id="employeeRegisterForm" cssClass="form-horizontal" modelAttribute="loginUserRequest" method="post" action="loginSaveUserRequest">
+<form method="get" action="LoginLogout">
         <div style="text-align: center; display: block;">
             <div style="text-align: center; border: 1px solid grey;">
                 User Name: <input type="text" style="padding: 10px; margin: 5px;"
                     name="username"><br></br> Password: <input type="password"
                     style="padding: 10px; margin: 5px;" name="password"> 
-                  <input type="submit" id="loginSaveUserRequest" class="btn btn-primary" value="Login" onclick="return submitEmployeeForm();"/>
+                  <input type="submit" id="loginSaveUserRequest" class="btn btn-primary" value="Login" />
 
                 <div>
                     <span class="error" style="padding: 10px; margin: 5px;">${error}</span>
                 </div>
             </div>
         </div>
-</form:form>
+</form>
 </body>
 </html>

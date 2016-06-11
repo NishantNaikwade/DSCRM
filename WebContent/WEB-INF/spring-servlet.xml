@@ -32,8 +32,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.nextech.dscrm.model.UserRequest</value>
-
+                 <value>com.nextech.dscrm.model.LoginUserRequest</value>
+                 <value>com.nextech.dscrm.model.UserRequest</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -42,14 +42,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
-	</bean>
-	<bean id="sessionFactory1"
+ </bean>
+	<!--<bean id="sessionFactory1"
         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
                 <value>com.nextech.dscrm.model.LoginUserRequest</value>
-
             </list>
         </property>
         <property name="hibernateProperties">
@@ -58,8 +57,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
-    </bean>
-
+    </bean> -->
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

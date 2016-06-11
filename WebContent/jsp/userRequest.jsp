@@ -9,6 +9,80 @@ pageEncoding="UTF-8" %>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Ranga Reddy">
 <head>
+<script type="text/javascript">
+function validateFormOnSubmit(theForm) {
+var reason = "";
+  reason += validateUsername(theForm.name);
+  reason += validateEmail(theForm.email);
+  reason += validatePhone(theForm.mobile);   
+  if (reason != "") {
+    alert("Some fields need correction:\n" + reason);
+    return false;
+  }
+
+  alert("All fields are filled correctly");
+  return true;
+}
+function validateUsername(fld) {
+    var error = "";
+    var illegalChars = /\W/; // allow letters, numbers, and underscores
+ 
+    if (fld.value == "") {
+        fld.style.background = 'Yellow'; 
+        error = "You didn't enter a username.\n";
+    } else if ((fld.value.length < 4) || (fld.value.length > 15)) {
+        fld.style.background = 'Yellow'; 
+        error = "The username is the wrong length.\n";
+    } else if (illegalChars.test(fld.value)) {
+        fld.style.background = 'Yellow'; 
+        error = "The username contains illegal characters.\n";
+    } else {
+        fld.style.background = 'White';
+    } 
+    return error;
+}
+
+function trim(s)
+{
+  return s.replace(/^\s+|\s+$/, '');
+}
+function validateEmail(fld) {
+    var error="";
+    var tfld = trim(fld.value);                        // value of field with whitespace trimmed off
+    var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ;
+    var illegalChars= /[\(\)\<\>\,\;\:\\\"\[\]]/ ;
+   
+    if (fld.value == "") {
+        fld.style.background = 'Yellow';
+        error = "You didn't enter an email address.\n";
+    } else if (!emailFilter.test(tfld)) {              //test email for illegal characters
+        fld.style.background = 'Yellow';
+        error = "Please enter a valid email address.\n";
+    } else if (fld.value.match(illegalChars)) {
+        fld.style.background = 'Yellow';
+        error = "The email address contains illegal characters.\n";
+    } else {
+        fld.style.background = 'White';
+    }
+    return error;
+}
+function validatePhone(fld) {
+    var error = "";
+    var stripped = fld.value.replace(/[\(\)\.\-\ ]/g, '');    
+
+   if (fld.value == "") {
+        error = "You didn't enter a phone number.\n";
+        fld.style.background = 'Yellow';
+    } else if (isNaN(parseInt(stripped))) {
+        error = "The phone number contains illegal characters.\n";
+        fld.style.background = 'Yellow';
+    } else if (!(stripped.length == 10)) {
+        error = "The phone number is the wrong length. Make sure you included an area code.\n";
+        fld.style.background = 'Yellow';
+    }
+    return error;
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Information</title>
 <!-- Bootstrap CSS -->
@@ -29,7 +103,7 @@ Employee Details
 </h3>
 </div>
 <div class="panel-body">
-<form:form id="employeeRegisterForm" cssClass="form-horizontal" modelAttribute="userRequest" method="post" action="saveUserRequest">
+<form:form id="employeeRegisterForm" cssClass="form-horizontal" modelAttribute="userRequest" method="post" onsubmit="return validateFormOnSubmit(this)" action="saveUserRequest">
 
 <div class="form-group">
 <div class="control-label col-xs-3"> <form:label path="name" >Name</form:label> </div>
@@ -66,7 +140,7 @@ Employee Details
 <div class="col-xs-4">
 </div>
 <div class="col-xs-4">
-<input type="submit" id="saveUserRequest" class="btn btn-primary" value="Save" onclick="return submitEmployeeForm();"/>
+<input type="submit" id="saveUserRequest" class="btn btn-primary" value="Save"/>
 </div>
 <div class="col-xs-4">
 </div>
@@ -81,32 +155,6 @@ Employee Details
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-function submitEmployeeForm() { 
 
-// getting the employee form values
-var name = $('#name').val().trim();
-var email = $('#email').val();
-var mobile = $('#mobile').val();
-var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-if (name != '' && email != '' && mobile != '') {
-	if (email.match(emailReg)) {
-	if (contact.length == 10) {
-	alert("All type of validation has done on OnSubmit event.");
-	return true;
-	} else {
-	alert("The Contact No. must be at least 10 digit long!");
-	return false;
-	}
-	} else {
-	alert("Invalid Email Address...!!!");
-	return false;
-	}
-	} else {
-	alert("All fields are required.....!");
-	return false;
-	}
-	}
-</script>
 </body>
 </html>

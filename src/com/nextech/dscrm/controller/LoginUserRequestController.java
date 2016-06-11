@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nextech.dscrm.model.LoginUserRequest;
 import com.nextech.dscrm.services.LoginUserRequestServiceImpl;
+
 @Controller
 public class LoginUserRequestController {
 	public LoginUserRequestController() {
@@ -22,12 +23,12 @@ public class LoginUserRequestController {
 		LoginUserRequest loginUserRequest = new LoginUserRequest();
 		modelMap.addAttribute("loginUserRequest", loginUserRequest);
 		return "loginUserRequest";
+		
 	}
 
 	@RequestMapping("/loginSaveUserRequest")
 	public String loginSaveUserRequest(
 			@ModelAttribute("loginUserRequest") LoginUserRequest loginUserRequest) {
-
 		loginUserRequestServiceImpl.loginSaveUserRequest(loginUserRequest);
 		return "loginSaveUserRequest";
 	}

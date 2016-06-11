@@ -25,7 +25,7 @@ public class UserRequestController {
 
 	@Autowired
 	UserRequestServiceImpl userRequestServiceImpl;
-	
+
 	@RequestMapping("/userRequest")
 	public String userRequest(ModelMap modelMap) {
 		UserRequest userRequest = new UserRequest();
@@ -39,6 +39,11 @@ public class UserRequestController {
 		// UserRequest userRequest = (UserRequest) modelMap.get("userRequest");
 		userRequestServiceImpl.saveUserRequest(userRequest);
 		return "saveUserRequest";
+	}
+	@RequestMapping("/updateUserRequest")
+	public String updateUserRequest(@ModelAttribute("userRequest") UserRequest userRequest){
+		userRequestServiceImpl.updateUserRequest(userRequest);
+		return "updateUserRequest";
 	}
 
 	@RequestMapping("/viewAllUserRequests")
@@ -59,12 +64,14 @@ public class UserRequestController {
 	}
 
 	@RequestMapping("/searchUser")
-	public String searchUser(@RequestParam("searchName") String searchName,
-			ModelMap modelMap) {
+	public String searchUser(
+			@RequestParam("searchTypeDropdown") String searchTypeDropdown,
+			@RequestParam("searchUsers") String searchUsers, ModelMap modelMap) {
+		System.out.println("in searchUser......");
 		logger.info("Searching the UserRequest.UserRequest Names : "
-				+ searchName);
+				+ searchUsers);
 		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
-				.findAllUserRequestsForUserName(searchName);
+				.findAllUserRequestsForUserName(searchUsers);
 		System.out.println("viewAllUserRequests size : "
 				+ viewAllUserRequests.size());
 		modelMap.addAttribute("userRequests", viewAllUserRequests);
@@ -73,11 +80,14 @@ public class UserRequestController {
 
 	@RequestMapping("/searchUserByTime")
 	public String searchUserByTime(
-			@RequestParam("searchTime") Timestamp searchTime, ModelMap modelMap) {
+			@RequestParam("searchTypeDropdown") String searchTypeDropdown,
+			@RequestParam("searchUsers") Timestamp searchUsers,
+			ModelMap modelMap) {
+		System.out.println("in searchUserByTime......");
 		logger.info("Searching the UserRequest.UserRequest Times: "
-				+ searchTime);
+				+ searchUsers);
 		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
-				.findAllUserRequsetForTime(searchTime);
+				.findAllUserRequsetForTime(searchUsers);
 		System.out.println("viewAllUserRequests size : "
 				+ viewAllUserRequests.size());
 		modelMap.addAttribute("userRequests", viewAllUserRequests);
@@ -86,22 +96,22 @@ public class UserRequestController {
 
 	@RequestMapping("/searchUserByMobile")
 	public String searchUserByMobile(
-			@RequestParam("searchMobile") String searchMobile, ModelMap modelMap) {
+			@RequestParam("searchTypeDropdown") String searchTypeDropdown,
+			@RequestParam("searchUsers") String searchUsers, ModelMap modelMap) {
+		System.out.println("in searchUserByMobile......");
 		logger.info("Searching the UserRequest.UserRequest Mobiles : "
-				+ searchMobile);
+				+ searchUsers);
 		List<UserRequest> viewAllUserRequests = userRequestServiceImpl
-				.findUserRequestByMobileNumber(searchMobile);
+				.findUserRequestByMobileNumber(searchUsers);
 		System.out.println("viewAllUserRequests size : "
 				+ viewAllUserRequests.size());
 		modelMap.addAttribute("userRequests", viewAllUserRequests);
 		return "viewAllUserRequests";
 	}
-
 	@RequestMapping("/createUser")
 	public ModelAndView createUser(@ModelAttribute UserRequest userRequest) {
 		logger.info("Creating UserRequest. Data: " + userRequest);
 		return new ModelAndView("userRequest");
 	}
-	
 
 }
