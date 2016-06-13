@@ -32,8 +32,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-                 <value>com.nextech.dscrm.model.LoginUserRequest</value>
-                 <value>com.nextech.dscrm.model.UserRequest</value>
+				<value>com.nextech.dscrm.model.LoginUserRequest</value>
+				<value>com.nextech.dscrm.model.UserRequest</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -42,22 +42,33 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
- </bean>
-	<!--<bean id="sessionFactory1"
-        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="annotatedClasses">
-            <list>
-                <value>com.nextech.dscrm.model.LoginUserRequest</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-            </props>
-        </property>
-    </bean> -->
+	</bean>
+	<!--<bean id="sessionFactory1" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource" /> <property name="annotatedClasses"> 
+		<list> <value>com.nextech.dscrm.model.LoginUserRequest</value> </list> </property> 
+		<property name="hibernateProperties"> <props> <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> 
+		<prop key="hibernate.show_sql">true</prop> </props> </property> </bean> -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="youremail" />
+		<property name="password" value="yourpassword" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">Error</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -65,8 +76,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<bean id="userRequestDaoImpl" class="com.nextech.dscrm.dao.UserRequestDAOImpl" />
 	<bean id="userRequestServiceImpl" class="com.nextech.dscrm.services.UserRequestServiceImpl" />
-    <bean id="loginUserRequestDaoImpl" class="com.nextech.dscrm.dao.LoginUserRequestDAOImpl" />
-    <bean id="loginUserRequestServiceImpl" class="com.nextech.dscrm.services.LoginUserRequestServiceImpl" />
+	<bean id="loginUserRequestDaoImpl" class="com.nextech.dscrm.dao.LoginUserRequestDAOImpl" />
+	<bean id="loginUserRequestServiceImpl" class="com.nextech.dscrm.services.LoginUserRequestServiceImpl" />
 
 	<mvc:annotation-driven />
 </beans>  
