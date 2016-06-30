@@ -51,6 +51,7 @@ pageEncoding="UTF-8" %>
         form.userPassword.focus();
         return false;
       }
+      
     }
 
     alert("You entered a valid password: " + form.userPassword.value);
@@ -71,6 +72,9 @@ pageEncoding="UTF-8" %>
   PASSWORD: <input type="password" style="padding: 10px;margin: 5px;" name="userPassword"><br></br>
   <input type="submit" id="loginSaveUserRequest" class="btn btn-primary" value="login"/>
     <div>
+    <div align="right">
+                        <a href="userModel">Add New User</a>
+                    </div>
     <span class="error" style="padding: 10px;margin: 5px;">${error}</span>
     </div>
 </div>    

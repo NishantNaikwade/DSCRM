@@ -11,7 +11,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
 	<context:component-scan base-package="com.nextech.dscrm" />
-	<bean
+	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
@@ -32,6 +32,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
+			    <value>com.nextech.dscrm.model.UserModel</value>
 				<value>com.nextech.dscrm.model.LoginUserRequest</value>
 				<value>com.nextech.dscrm.model.UserRequest</value>
 			</list>
@@ -51,8 +52,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="youremail" />
-		<property name="password" value="yourpassword" />
+		<property name="username" value="shahadeochavan@gmail.com" />
+		<property name="password" value="9730763846" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
@@ -65,7 +66,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="java.lang.Exception">Error</prop>
+				<prop key="java.lang.Exception">error</prop>
 			</props>
 		</property>
 	</bean>
@@ -78,6 +79,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="userRequestServiceImpl" class="com.nextech.dscrm.services.UserRequestServiceImpl" />
 	<bean id="loginUserRequestDaoImpl" class="com.nextech.dscrm.dao.LoginUserRequestDAOImpl" />
 	<bean id="loginUserRequestServiceImpl" class="com.nextech.dscrm.services.LoginUserRequestServiceImpl" />
+	<bean id="userDaoImpl" class="com.nextech.dscrm.dao.UserDAOImpl" />
+    <bean id="userServiceImpl" class="com.nextech.dscrm.services.UserServiceImpl" />
 
 	<mvc:annotation-driven />
 </beans>  

@@ -24,5 +24,5 @@ public interface UserRequestService {
 	public List<UserRequest> findAllUserRequsetForTime(Timestamp userTime);
 
 	public long createUser(UserRequest userRequest);
-
+	
 }
