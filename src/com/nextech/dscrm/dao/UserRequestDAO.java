@@ -23,4 +23,6 @@ public interface UserRequestDAO {
 	List<UserRequest> findAllUserRequsetForTime(Timestamp userTime);
 
 	public long createUser(UserRequest userRequest);
+	
+	
 }

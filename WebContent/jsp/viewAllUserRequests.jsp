@@ -45,10 +45,10 @@
                 <div class="col-md-6">
                     <select name="searchTypeDropdown" id="searchTypeDropdown">
                         <option value="Select">Select search option</option>
-                        <option value="searchUser">Search By Name</option>
+                        <option value="searchUserByName">Search By Name</option>
                         <option value="searchUserByMobile">Search By Mobile</option>
                         <option value="searchUserByTime">Search By Time</option>
-                    </select>
+                    </select>   
                     <input type="text" name="searchUsers" id="searchUsers">
                 </div>
             </div>
@@ -81,6 +81,8 @@
                                     <th>Description</th>
                                     <th>Request Time</th>
                                     <th>Request Update Time</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,6 +95,9 @@
                                         <th><c:out value="${userRequests.requirementDescription}" /></th>
                                         <th><c:out value="${userRequests.requestTime}" /></th>
                                         <th><c:out value="${userRequests.requestUpdateTime}" /></th>
+                                         <th><a href="updateUserRequest?id=<c:out value='${userRequests.id}'/>">Edit</a></th>
+                                          <th><a href="deleteUserRequest?id=<c:out value='${userRequests.id}'/>">Delete</a></th>                          
+                      
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -110,6 +115,9 @@
             document.getElementById("searchAllUsersForm").action = action;
             document.getElementById("searchAllUsersForm").submit();
         }
-    </script>   
+    </script>  
+   <%--  <%
+    request.getRequestDispatcher("/sendEmail").forward(request, response);
+    %>  --%>
 </body>
 </html>

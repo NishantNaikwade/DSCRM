@@ -23,7 +23,7 @@ public class LoginUserRequestController {
 		LoginUserRequest loginUserRequest = new LoginUserRequest();
 		modelMap.addAttribute("loginUserRequest", loginUserRequest);
 		return "loginUserRequest";
-		
+
 	}
 
 	@RequestMapping("/loginSaveUserRequest")

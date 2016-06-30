@@ -15,6 +15,7 @@
 		reason += validateUsername(theForm.name);
 		reason += validateEmail(theForm.email);
 		reason += validatePhone(theForm.mobile);
+
 		if (reason != "") {
 			alert("Some fields need correction:\n" + reason);
 			return false;
@@ -104,7 +105,7 @@
 				<form:form id="employeeRegisterForm" cssClass="form-horizontal"
 					modelAttribute="userRequest" method="post"
 					onsubmit="return validateFormOnSubmit(this)"
-					action="sendEmail">
+					action="saveUserRequest">
 
 					<div class="form-group">
 						<div class="control-label col-xs-3">
@@ -146,7 +147,7 @@
 					</div>
 
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="row">
 							<div class="col-xs-4"></div>
 							<div class="col-xs-4">
@@ -155,7 +156,19 @@
 							</div>
 							<div class="col-xs-4"></div>
 						</div>
-					</div>
+					</div> -->
+					<tr>
+                <td colspan="3">
+                    <c:choose>
+                        <c:when test="${edit}">
+                            <input type="submit" value="Update"/>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="submit" value="Register"/>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
 
 				</form:form>
 			</div>

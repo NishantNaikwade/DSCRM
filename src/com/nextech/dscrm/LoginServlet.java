@@ -1,11 +1,17 @@
 package com.nextech.dscrm;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.nextech.dscrm.dao.LoginUserRequestDAO;
 
 /**
  * Servlet implementation class LoginServlet
@@ -26,32 +32,37 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Inside goGet login");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		System.out.println("Username : " + username);
-		System.out.println("Password : " + password);
-		if (username != null && password != null && !username.equals("") && !password.equals("")) {
-			response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+		String n = request.getParameter("username");
+		String p = request.getParameter("password");
+
+		HttpSession session = request.getSession(false);
+		if (session != null)
+			session.setAttribute("name", n);
+		if (LoginUserRequestDAO.validate(n, p)) {
+			response.sendRedirect("welcome.jsp");
+
 		} else {
-			request.setAttribute("error", "Unknown user, please try again");
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			// out.print("<p style=\"color:red\">Sorry username or password error</p>");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.include(request, response);
 		}
+
+		out.close();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Inside doPost login");
 		doGet(request, response);
-		request.getRequestDispatcher("/userRequest").forward(request, response);
+		// request.getRequestDispatcher("/userRequest").forward(request,
+		// response);
 	}
 
 }
