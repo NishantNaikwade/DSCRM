@@ -13,4 +13,6 @@ public interface UserDAO {
 
 	UserModel findById(Integer id);
 
+	boolean email_Unique(String email);
+
 }

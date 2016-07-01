@@ -1,4 +1,3 @@
- var passwordpattern=  /[0-9]/
 var namepattern=/^[a-zA-Z]+$/
  var phonepattern = /^\d{10}$/
  var emailpattern =/^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z0-9_]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,4})$/

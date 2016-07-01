@@ -3,14 +3,10 @@ package com.nextech.dscrm.dao;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.nextech.dscrm.model.UserRequest;
 import com.nextech.dscrm.util.HibernateUtil;
 

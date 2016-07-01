@@ -12,5 +12,7 @@ public interface UserService {
 	public Integer updateUserModel(UserModel userModel);
 	
 	public Integer deleteUserModel(int id);
+	
+	boolean email_Unique(String email);
 
 }

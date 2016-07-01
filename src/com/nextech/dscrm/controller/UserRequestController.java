@@ -1,22 +1,18 @@
 package com.nextech.dscrm.controller;
 
-
 import java.util.Properties;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
-
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -24,7 +20,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import com.nextech.dscrm.model.UserRequest;
 import com.nextech.dscrm.services.UserRequestServiceImpl;
 
@@ -158,21 +153,22 @@ public class UserRequestController {
 		modelMap.addAttribute("edit", true);
 		return "updateUserRequest";
 	}
-	@RequestMapping(value= "/updateUserRequest/add", method = RequestMethod.POST)
-	public String addPerson(@ModelAttribute("updateUserRequest") UserRequest p){
-		
-		if(p.getId() == 0){
-			//new person, add it
+
+	@RequestMapping(value = "/updateUserRequest/add", method = RequestMethod.POST)
+	public String addPerson(@ModelAttribute("updateUserRequest") UserRequest p) {
+
+		if (p.getId() == 0) {
+			// new person, add it
 			this.userRequestServiceImpl.createUser(p);
-		}else{
-			//existing person, call update
+		} else {
+			// existing person, call update
 			this.userRequestServiceImpl.updateUserRequest(p);
 		}
-		
+
 		return "redirect:/persons";
-		
+
 	}
-	
+
 	@RequestMapping("/viewAllUserRequests")
 	public String viewAllUserRequests(ModelMap modelMap) {
 		List<UserRequest> viewAllUserRequests = userRequestServiceImpl

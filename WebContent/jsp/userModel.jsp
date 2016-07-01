@@ -7,6 +7,33 @@
 <html>
 <head>
 <!--validation-->
+<script type="text/javascript">
+	function checkEmail(value) {
+		$('div.alert').hide();
+		$.ajax({
+
+			url : '${home}email_Unique',
+			type : 'POST',
+			data : {
+				value : value
+			},
+			dataType : 'json',
+			success : function(result) {
+				if (result) {
+					//alert("success");
+					document.getElementById('email').value = '';
+					$("#ajax_div").show();
+					$('#email').focus();
+				} else {
+					//alert("failure");
+					$("#ajax_div").hide();
+				}
+
+			}
+		});
+
+	}
+</script>
 <script type="text/javascript" src="resources/js/innerHTMLValidation.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -63,9 +90,14 @@
 								<td><LABEL for="usernam">User_name:<sup
 										style="color: #F00">*</sup>
 								</LABEL></td>
-								<td><INPUT type="text" id="usernam" name="username"></td>
+								<td><INPUT type="text" id="usernam" name="userName"></td>
 								<td width="200px"><i style="color: red;" id="pointname"></i></td>
 							</tr>
+
+							<!-- <tr>	<td><input type="text" name="email" id="email"
+								value="" placeholder="email" class="form-control"
+								onchange="checkEmail(this.value)" /></td>
+								</tr> -->
 							<tr>
 								<td><LABEL for="password1">Password:<sup
 										style="color: #F00">*</sup>
@@ -76,7 +108,7 @@
 							<tr>
 								<td></td>
 								<td><br /> <INPUT type="submit"
-									onClick="return validateForm()" value="Submit"> <INPUT
+									onClick="return checkEmail(this.value)" value="Submit"> <INPUT
 									type="reset" onClick="return confirmreset()"></td>
 							</tr>
 							<tr>

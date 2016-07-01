@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
 		return userDAOImpl.deleteUserModel(id);
 	}
 
+	public boolean email_Unique(String email) {
+		// TODO Auto-generated method stub
+		return userDAOImpl.email_Unique(email);
+	}
+
 }

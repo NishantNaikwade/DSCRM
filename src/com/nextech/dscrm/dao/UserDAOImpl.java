@@ -1,6 +1,7 @@
 package com.nextech.dscrm.dao;
 
 import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -58,6 +59,31 @@ public class UserDAOImpl implements UserDAO {
 		Serializable ids = session.getIdentifier(userRequest);
 		session.close();
 		return (Integer) ids;
+	}
+	@Override
+	public boolean email_Unique(String email) {
+	Session session = sessionFactory.openSession();
+	try {
+	org.hibernate.Query query = session.createQuery("select count(*) from userModel where email=:em and status<>0")
+	.setParameter("em", email);
+	//return query.list();
+	long count = (Long) query.uniqueResult();
+	System.out.println("count "+count);
+	if(count==0){
+	return false;
+	}
+
+	} catch (Exception e) {
+	e.printStackTrace();
+	return false;
+	} finally {
+	destroySession(session);
+	}
+	return true;
+	}
+	private void destroySession(Session session) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
