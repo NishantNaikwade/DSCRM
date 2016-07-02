@@ -1,16 +1,20 @@
 package com.nextech.dscrm.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.mail.Message;
@@ -20,6 +24,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import com.nextech.dscrm.model.UpdateUserRequest;
 import com.nextech.dscrm.model.UserRequest;
 import com.nextech.dscrm.services.UserRequestServiceImpl;
 
@@ -134,40 +139,28 @@ public class UserRequestController {
 		}
 	}
 
-	public static void main(String[] argv) {
-		SendSMS sms = new SendSMS();
-		sms.msgsend();
-		System.out.println("Successfull");
-	}
-
 	/*
 	 * @RequestMapping("/updateUserRequest") public String
 	 * updateUserRequest(@ModelAttribute("userRequest") UserRequest
 	 * userRequest){ userRequestServiceImpl.updateUserRequest(userRequest);
 	 * return "updateUserRequest"; }
 	 */
-	@RequestMapping("/updateUserRequest")
+	/*@RequestMapping("/updateUserRequest")
 	public String updateUserRequest(ModelMap modelMap) {
 		UserRequest userRequest = new UserRequest();
 		modelMap.addAttribute("userRequest", userRequest);
 		modelMap.addAttribute("edit", true);
 		return "updateUserRequest";
-	}
+	}*/
 
-	@RequestMapping(value = "/updateUserRequest/add", method = RequestMethod.POST)
-	public String addPerson(@ModelAttribute("updateUserRequest") UserRequest p) {
-
-		if (p.getId() == 0) {
-			// new person, add it
-			this.userRequestServiceImpl.createUser(p);
-		} else {
-			// existing person, call update
-			this.userRequestServiceImpl.updateUserRequest(p);
-		}
-
-		return "redirect:/persons";
-
-	}
+	@RequestMapping("/updateUserRequest")
+	public ModelAndView deleteUserRequest(@ModelAttribute("command")UpdateUserRequest updateUserRequest,
+	   BindingResult result) {
+	  Map<String, Object> model = new HashMap<String, Object>();
+	  model.put("userRequest", prepareUpdateUserRequest(userRequestServiceImpl.getUserRequest(updateUserRequest.getId())));
+	  model.put("userRequests",  prepareListofBean(userRequestServiceImpl.findAllUserRequests()));
+	  return new ModelAndView("userRequest", model);
+	 }
 
 	@RequestMapping("/viewAllUserRequests")
 	public String viewAllUserRequests(ModelMap modelMap) {
@@ -238,4 +231,42 @@ public class UserRequestController {
 		return new ModelAndView("userRequest");
 	}
 
+	private UserRequest prepareModel(UpdateUserRequest updateUserRequest){
+		UserRequest userRequest = new UserRequest();
+		userRequest.setName(updateUserRequest.getName());
+		userRequest.setEmail(updateUserRequest.getEmail());
+		userRequest.setMobile(updateUserRequest.getMobile());
+		userRequest.setRequirementDescription(updateUserRequest.getRequirementDescription());
+		userRequest.setId(updateUserRequest.getId());
+		updateUserRequest.setId(null);
+		  return userRequest;
+		 }
+		 
+		 private List<UpdateUserRequest> prepareListofBean(List<UserRequest> userRequests){
+		  List<UpdateUserRequest> beans = null;
+		  if(userRequests != null && !userRequests.isEmpty()){
+		   beans = new ArrayList<UpdateUserRequest>();
+		   UpdateUserRequest bean = null;
+		   for(UserRequest userRequest : userRequests){
+		    bean = new UpdateUserRequest();
+		    bean.setName(userRequest.getName());
+		    bean.setId(userRequest.getId());
+		    bean.setEmail(userRequest.getEmail());
+		    bean.setMobile(userRequest.getMobile());
+		    bean.setRequirementDescription(userRequest.getRequirementDescription());
+		    beans.add(bean);
+		   }
+		  }
+		  return beans;
+		 }
+		 
+		 private UpdateUserRequest prepareUpdateUserRequest(UserRequest userRequet){
+			 UpdateUserRequest bean = new UpdateUserRequest();
+		  bean.setName(userRequet.getName());
+		  bean.setId(userRequet.getId());
+		  bean.setEmail(userRequet.getName());
+		  bean.setMobile(userRequet.getMobile());
+		  bean.setRequirementDescription(userRequet.getRequirementDescription());
+		  return bean;
+		 }
 }

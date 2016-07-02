@@ -33,6 +33,7 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		Serializable id = session.getIdentifier(userRequest);
 		session.close();
 		return (Integer) id;
+		
 	}
 
 	@Override
@@ -115,5 +116,11 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		return (Long) hibernateUtil.create(userRequest);
 	}
 	
+	public UserRequest getUserRequest(int userid) {
+		  return (UserRequest) sessionFactory.getCurrentSession().get(UserRequest.class, userid);
+		 }
+	public void deleteUserRequest(UserRequest userRequest) {
+		  sessionFactory.getCurrentSession().createQuery("DELETE FROM userRequest WHERE id = "+userRequest.getId()).executeUpdate();
+		 }
 	
 }

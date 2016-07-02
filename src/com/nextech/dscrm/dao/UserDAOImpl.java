@@ -2,10 +2,12 @@ package com.nextech.dscrm.dao;
 
 import java.io.Serializable;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.nextech.dscrm.model.UserModel;
 import com.nextech.dscrm.model.UserRequest;
 import com.nextech.dscrm.util.HibernateUtil;
@@ -61,16 +63,21 @@ public class UserDAOImpl implements UserDAO {
 		return (Integer) ids;
 	}
 	@Override
-	public boolean email_Unique(String email) {
+	public boolean email_Unique(String email1) {
 	Session session = sessionFactory.openSession();
 	try {
-	org.hibernate.Query query = session.createQuery("select count(*) from userModel where email=:em and status<>0")
-	.setParameter("em", email);
+	Query query = session.createQuery("select count(*) from UserModel where email=:em")
+	.setParameter("em", email1);
 	//return query.list();
 	long count = (Long) query.uniqueResult();
 	System.out.println("count "+count);
 	if(count==0){
-	return false;
+	return true;
+	}
+	else
+	{
+		return false;
+	
 	}
 
 	} catch (Exception e) {
@@ -79,7 +86,6 @@ public class UserDAOImpl implements UserDAO {
 	} finally {
 	destroySession(session);
 	}
-	return true;
 	}
 	private void destroySession(Session session) {
 		// TODO Auto-generated method stub

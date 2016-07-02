@@ -6,7 +6,7 @@ import java.util.List;
 import com.nextech.dscrm.model.UserRequest;
 
 public interface UserRequestDAO {
-	UserRequest findById(Integer id);
+public	UserRequest findById(Integer id);
 
 	Integer saveUserRequest(UserRequest userRequest);
 
@@ -23,6 +23,8 @@ public interface UserRequestDAO {
 	List<UserRequest> findAllUserRequsetForTime(Timestamp userTime);
 
 	public long createUser(UserRequest userRequest);
+	
+	public UserRequest getUserRequest(int userid);
 	
 	
 }

@@ -25,4 +25,6 @@ public interface UserRequestService {
 
 	public long createUser(UserRequest userRequest);
 	
+	public UserRequest getUserRequest(int userid);
+	
 }

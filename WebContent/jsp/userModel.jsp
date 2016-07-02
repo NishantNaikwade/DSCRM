@@ -76,7 +76,7 @@
 								<td><LABEL for="email">Email:<sup
 										style="color: red;">*</sup>
 								</LABEL></td>
-								<td><INPUT type="text" id="email" name="email"></td>
+								<td><INPUT type="text" id="email" name="email" class="form-control" ></td>
 								<td width="200px"><i style="color: red;" id="pointemail"></i></td>
 							</tr>
 							<tr>
@@ -108,7 +108,7 @@
 							<tr>
 								<td></td>
 								<td><br /> <INPUT type="submit"
-									onClick="return checkEmail(this.value)" value="Submit"> <INPUT
+									onClick="return validateForm()" value="Submit"> <INPUT
 									type="reset" onClick="return confirmreset()"></td>
 							</tr>
 							<tr>

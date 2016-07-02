@@ -52,13 +52,12 @@ public class UserController {
 		userServiceImpl.deleteUserModel((int) id);
 		return new ModelAndView("redirect:viewAllUserRequests");
 	}
+
 	@ResponseBody
-	@RequestMapping(value="email_Unique" ,method=RequestMethod.POST)
-	public boolean email_Unique(@RequestParam("value") String email){
-	boolean result=userServiceImpl.email_Unique(email);
-	//System.out.println("MaterialName "+materialName);  
-	return result;
+	@RequestMapping(value = "email_Unique", method = RequestMethod.POST)
+	public boolean email_Unique(@RequestParam("value") String email) {
+		boolean result = userServiceImpl.email_Unique(email);
+		return result;
 	}
-	
 
 }
