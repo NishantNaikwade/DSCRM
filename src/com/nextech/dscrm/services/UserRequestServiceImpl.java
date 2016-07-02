@@ -71,6 +71,10 @@ public class UserRequestServiceImpl implements UserRequestService {
 	public long createUser(UserRequest userRequest) {
 		return userRequestDAOImpl.createUser(userRequest);
 	}
+	@Override
+	 public UserRequest getUserRequest(int userid) {
+		  return userRequestDAOImpl.getUserRequest(userid);
+		 }
      
 
 }

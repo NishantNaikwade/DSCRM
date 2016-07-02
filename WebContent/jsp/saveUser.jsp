@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <table border='1'>
+    <table border='2'>
 	<h1>Registration Success</h1>
 	<div align="center">
 		<a href="index.jsp">Login</a>

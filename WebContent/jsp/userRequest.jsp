@@ -158,17 +158,14 @@
 						</div>
 					</div> -->
 					<tr>
-                <td colspan="3">
-                    <c:choose>
-                        <c:when test="${edit}">
-                            <input type="submit" value="Update"/>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="submit" value="Register"/>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
+						<td colspan="2"><c:if test="${!empty userRequest.name}">
+								<input type="submit"
+									value="<spring:message text="Edit UserRequest"/>" />
+							</c:if> <c:if test="${empty userRequest.name}">
+								<input type="submit"
+									value="<spring:message text="Add UserRequest"/>" />
+							</c:if></td>
+					</tr>
 
 				</form:form>
 			</div>
