@@ -123,4 +123,31 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		  sessionFactory.getCurrentSession().createQuery("DELETE FROM userRequest WHERE id = "+userRequest.getId()).executeUpdate();
 		 }
 	
+	public List<UserRequest> getUserReqById(Integer id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		List<UserRequest> userList = session.createQuery(
+				"from UserRequest Where id= '" + id + "'")
+				.list();
+		System.out.println("userlist size : " + userList.size());
+		return userList;
+	}
+
+	public boolean updateUser(String id, UserRequest userRequest) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		System.out.println("iddddddddddddddddd "+id);
+		try {
+			session.saveOrUpdate(id, userRequest);		
+			 tx.commit();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 }

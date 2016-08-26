@@ -2,7 +2,9 @@ package com.nextech.dscrm.services;
 
 import java.sql.Timestamp;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.nextech.dscrm.dao.UserRequestDAOImpl;
 import com.nextech.dscrm.model.UserRequest;
 
@@ -71,10 +73,21 @@ public class UserRequestServiceImpl implements UserRequestService {
 	public long createUser(UserRequest userRequest) {
 		return userRequestDAOImpl.createUser(userRequest);
 	}
+	
+	public boolean updateUser(String id, UserRequest userRequest) {
+		// TODO Auto-generated method stub
+		return userRequestDAOImpl.updateUser(id,userRequest);
+	}
 	@Override
 	 public UserRequest getUserRequest(int userid) {
 		  return userRequestDAOImpl.getUserRequest(userid);
 		 }
-     
+	public List<UserRequest> getUserReqById(Integer id) {
+		// TODO Auto-generated method stub
+		return userRequestDAOImpl.getUserReqById(id);
+	}
+
+
+
 
 }

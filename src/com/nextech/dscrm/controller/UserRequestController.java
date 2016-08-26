@@ -1,8 +1,5 @@
 package com.nextech.dscrm.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -12,11 +9,11 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -24,7 +21,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import com.nextech.dscrm.model.UpdateUserRequest;
+import javax.servlet.http.HttpSession;
+
 import com.nextech.dscrm.model.UserRequest;
 import com.nextech.dscrm.services.UserRequestServiceImpl;
 
@@ -140,27 +138,38 @@ public class UserRequestController {
 	}
 
 	/*
-	 * @RequestMapping("/updateUserRequest") public String
-	 * updateUserRequest(@ModelAttribute("userRequest") UserRequest
-	 * userRequest){ userRequestServiceImpl.updateUserRequest(userRequest);
-	 * return "updateUserRequest"; }
+	 * @RequestMapping("/updateUserRequest") public String updateUserRequest(
+	 * 
+	 * @ModelAttribute("userRequest") UserRequest userRequest) {
+	 * userRequestServiceImpl.updateUserRequest(userRequest); return
+	 * "updateUserRequest"; }
 	 */
-	/*@RequestMapping("/updateUserRequest")
-	public String updateUserRequest(ModelMap modelMap) {
-		UserRequest userRequest = new UserRequest();
-		modelMap.addAttribute("userRequest", userRequest);
-		modelMap.addAttribute("edit", true);
-		return "updateUserRequest";
-	}*/
 
 	@RequestMapping("/updateUserRequest")
-	public ModelAndView deleteUserRequest(@ModelAttribute("command")UpdateUserRequest updateUserRequest,
-	   BindingResult result) {
-	  Map<String, Object> model = new HashMap<String, Object>();
-	  model.put("userRequest", prepareUpdateUserRequest(userRequestServiceImpl.getUserRequest(updateUserRequest.getId())));
-	  model.put("userRequests",  prepareListofBean(userRequestServiceImpl.findAllUserRequests()));
-	  return new ModelAndView("userRequest", model);
-	 }
+	public ModelAndView updateUserRequest(
+			@ModelAttribute("userRequest") UserRequest userRequest,
+			@RequestParam("id") int id, ModelMap modelMap, HttpSession session) {
+		System.out.println("inside update////////////////////");
+		List<UserRequest> updateUserRequests = userRequestServiceImpl
+				.getUserReqById(id);
+		session.setAttribute("getnewid", id);
+		System.out.println("getRequirementDescription "
+				+ userRequest.getRequirementDescription());
+		System.out.println("updateUserRequests ===>" + updateUserRequests);
+		modelMap.addAttribute("updateUserRequests", updateUserRequests);
+		return new ModelAndView("updateUserRequest");
+	}
+
+	@RequestMapping("/updateUserAction")
+	public String updateUserAction(@ModelAttribute UserRequest userRequest,
+			ModelMap modelMap, HttpSession session) {
+		System.out.println("iddddd ====> " + userRequest.getId());
+		String id = userRequest.getId().toString();
+		boolean result = userRequestServiceImpl.updateUser(id, userRequest);
+		System.out.println("result ====> " + result);
+		return "redirect:viewAllUserRequests";
+
+	}
 
 	@RequestMapping("/viewAllUserRequests")
 	public String viewAllUserRequests(ModelMap modelMap) {
@@ -231,42 +240,4 @@ public class UserRequestController {
 		return new ModelAndView("userRequest");
 	}
 
-	private UserRequest prepareModel(UpdateUserRequest updateUserRequest){
-		UserRequest userRequest = new UserRequest();
-		userRequest.setName(updateUserRequest.getName());
-		userRequest.setEmail(updateUserRequest.getEmail());
-		userRequest.setMobile(updateUserRequest.getMobile());
-		userRequest.setRequirementDescription(updateUserRequest.getRequirementDescription());
-		userRequest.setId(updateUserRequest.getId());
-		updateUserRequest.setId(null);
-		  return userRequest;
-		 }
-		 
-		 private List<UpdateUserRequest> prepareListofBean(List<UserRequest> userRequests){
-		  List<UpdateUserRequest> beans = null;
-		  if(userRequests != null && !userRequests.isEmpty()){
-		   beans = new ArrayList<UpdateUserRequest>();
-		   UpdateUserRequest bean = null;
-		   for(UserRequest userRequest : userRequests){
-		    bean = new UpdateUserRequest();
-		    bean.setName(userRequest.getName());
-		    bean.setId(userRequest.getId());
-		    bean.setEmail(userRequest.getEmail());
-		    bean.setMobile(userRequest.getMobile());
-		    bean.setRequirementDescription(userRequest.getRequirementDescription());
-		    beans.add(bean);
-		   }
-		  }
-		  return beans;
-		 }
-		 
-		 private UpdateUserRequest prepareUpdateUserRequest(UserRequest userRequet){
-			 UpdateUserRequest bean = new UpdateUserRequest();
-		  bean.setName(userRequet.getName());
-		  bean.setId(userRequet.getId());
-		  bean.setEmail(userRequet.getName());
-		  bean.setMobile(userRequet.getMobile());
-		  bean.setRequirementDescription(userRequet.getRequirementDescription());
-		  return bean;
-		 }
 }
