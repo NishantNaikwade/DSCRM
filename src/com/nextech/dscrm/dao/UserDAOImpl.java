@@ -21,6 +21,7 @@ public class UserDAOImpl implements UserDAO {
 	public long createUserRegistration(UserModel userModel) {
 		return (Long) hibernateUtil.create(userModel);
 	}
+
 	@Override
 	public UserModel findById(Integer id) {
 		Session session = sessionFactory.openSession();
@@ -38,6 +39,7 @@ public class UserDAOImpl implements UserDAO {
 		session.close();
 		return (Integer) id;
 	}
+
 	@Override
 	public Integer updateUserModel(UserModel userModel) {
 		Session session = sessionFactory.openSession();
@@ -62,34 +64,35 @@ public class UserDAOImpl implements UserDAO {
 		session.close();
 		return (Integer) ids;
 	}
+
 	@Override
 	public boolean email_Unique(String email1) {
-	Session session = sessionFactory.openSession();
-	try {
-	Query query = session.createQuery("select count(*) from UserModel where email=:em")
-	.setParameter("em", email1);
-	//return query.list();
-	long count = (Long) query.uniqueResult();
-	System.out.println("count "+count);
-	if(count==0){
-	return true;
-	}
-	else
-	{
-		return false;
-	
+		Session session = sessionFactory.openSession();
+		try {
+			Query query = session.createQuery(
+					"select count(*) from UserModel where email=:em")
+					.setParameter("em", email1);
+			// return query.list();
+			long count = (Long) query.uniqueResult();
+			System.out.println("count " + count);
+			if (count == 0) {
+				return true;
+			} else {
+				return false;
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			destroySession(session);
+		}
 	}
 
-	} catch (Exception e) {
-	e.printStackTrace();
-	return false;
-	} finally {
-	destroySession(session);
-	}
-	}
 	private void destroySession(Session session) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -33,7 +33,7 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		Serializable id = session.getIdentifier(userRequest);
 		session.close();
 		return (Integer) id;
-		
+
 	}
 
 	@Override
@@ -115,20 +115,25 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 	public long createUser(UserRequest userRequest) {
 		return (Long) hibernateUtil.create(userRequest);
 	}
-	
+
 	public UserRequest getUserRequest(int userid) {
-		  return (UserRequest) sessionFactory.getCurrentSession().get(UserRequest.class, userid);
-		 }
+		return (UserRequest) sessionFactory.getCurrentSession().get(
+				UserRequest.class, userid);
+	}
+
 	public void deleteUserRequest(UserRequest userRequest) {
-		  sessionFactory.getCurrentSession().createQuery("DELETE FROM userRequest WHERE id = "+userRequest.getId()).executeUpdate();
-		 }
-	
+		sessionFactory
+				.getCurrentSession()
+				.createQuery(
+						"DELETE FROM userRequest WHERE id = "
+								+ userRequest.getId()).executeUpdate();
+	}
+
 	public List<UserRequest> getUserReqById(Integer id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		List<UserRequest> userList = session.createQuery(
-				"from UserRequest Where id= '" + id + "'")
-				.list();
+				"from UserRequest Where id= '" + id + "'").list();
 		System.out.println("userlist size : " + userList.size());
 		return userList;
 	}
@@ -137,11 +142,11 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		System.out.println("iddddddddddddddddd "+id);
+		System.out.println("iddddddddddddddddd " + id);
 		try {
-			session.saveOrUpdate(id, userRequest);		
-			 tx.commit();
-			
+			session.saveOrUpdate(id, userRequest);
+			tx.commit();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -149,5 +154,5 @@ public class UserRequestDAOImpl implements UserRequestDAO {
 		}
 		return true;
 	}
-	
+
 }

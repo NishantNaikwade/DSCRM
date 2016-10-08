@@ -11,7 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.nextech.dscrm.dao.LoginUserRequestDAO;
+import com.nextech.dscrm.dao.LoginUserRequestDAOImpl;
 
 /**
  * Servlet implementation class LoginServlet
@@ -44,8 +51,8 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session != null)
 			session.setAttribute("name", n);
-		if (LoginUserRequestDAO.validate(n, p)) {
-			response.sendRedirect("welcome.jsp");
+		if (LoginUserRequestDAOImpl.validate(n, p)) {
+			response.sendRedirect("jsp/welcome.jsp");
 
 		} else {
 			// out.print("<p style=\"color:red\">Sorry username or password error</p>");
