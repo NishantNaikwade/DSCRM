@@ -13,16 +13,16 @@
 <title>Thank You</title>
 </head>
 <body>
-<h1>Welcome to The  User</h1>
+<h1>Home</h1>
 <div class="feature-container">
-<div class="feature"><a href="../orders">Order Management</a></div>
-<div class="feature"><a href="/rawMaterilas">Raw Material Inventory</a></div>
-<div class="feature"><a href="/finishedGoods">Finished Goods Inventory</a></div>
-<div class="feature"><a href="/procurement">Procurement</a></div>
-<div class="feature"><a href="/operations">Operations</a></div>
-<div class="feature"><a href="/resources">Resource Management Management</a></div>
-<div class="feature"><a href="/notifications">Notifications</a></div>
-<div class="feature"><a href="/reports">Reports</a></div>
+<div class="feature"><a href="../oms">Order Management</a></div>
+<div class="feature"><a href="../rawMaterilas">Raw Material Inventory</a></div>
+<div class="feature"><a href="../finishedGoods">Finished Goods Inventory</a></div>
+<div class="feature"><a href="../procurement">Procurement</a></div>
+<div class="feature"><a href="../operations">Operations</a></div>
+<div class="feature"><a href="../resources">Resource Management Management</a></div>
+<div class="feature"><a href="../notifications">Notifications</a></div>
+<div class="feature"><a href="../reports">Reports</a></div>
 </div>
 <table class="table table-bordered">
 		<thead>

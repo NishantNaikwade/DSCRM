@@ -11,12 +11,35 @@
 <spring:url value="/resources/css/style.css" var="styleCSS" />
 <link href="${bootstrapCSS}" rel="stylesheet" />
 <link href="${styleCSS}" rel="stylesheet" />
-
-<title>Orders</title>
+<title>Order Management</title>
 </head>
 <body>
 
+<div class="feature-container">
+<div class="feature"><a href="./addOrder">Add New Order</a></div>
+</div>
+
 <table class="table table-hover table-bordered">
+                <thead >
+
+                    <tr>
+                        <th>No</th>
+                        <th>In Progress</th>
+                        <th>Completed</th>
+                        <th>Delivered</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td class="info"><c:out value="${number}" /></td>
+                            <td class="warning"><c:out value="${inProgressCount}" /></td>
+                            <td class="success"><c:out value="${completedCount}" /></td>
+                            <td class="active"><c:out value="${deliveredCount}" /></td>
+                        </tr>
+                </tbody>
+            </table>
+            
+            <table class="table table-hover table-bordered">
                 <thead>
 
                     <tr>
@@ -29,7 +52,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${orderList}" var="order">
-                        <tr>
+                        <tr class="<c:out value="${order.status}" />">
                             <td><c:out value="${order.orderId}" /></td>
                             <td><c:out value="${order.clientName}" /></td>
                             <td><c:out value="${order.productId}" /></td>

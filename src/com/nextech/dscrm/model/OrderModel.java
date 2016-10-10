@@ -7,6 +7,7 @@ public class OrderModel {
 	private String quantity;
 	private String productId;
 	private String deliveryDate;
+	private String status;
 	public String getOrderId() {
 		return orderId;
 	}
@@ -36,6 +37,12 @@ public class OrderModel {
 	}
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	
