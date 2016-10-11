@@ -1,29 +1,52 @@
 package com.nextech.dscrm.model;
 
+import java.sql.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Orders")
 public class OrderModel {
 
-	private String orderId;
-	private String clientName;
-	private String quantity;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer orderId;
+	@Column(name = "clientId")
+	private Integer clientId;
+	
+	@Column(name = "quantity")
+	private Integer quantity;
+	@Column(name = "productId")
 	private String productId;
-	private String deliveryDate;
-	private String status;
-	public String getOrderId() {
+	@Column(name = "deliveryDate")
+	private Date deliveryDate;
+	@Column(name = "status")
+	private Integer status;
+	@Column(name = "createTime")
+	private Date createTime;
+	
+//	private ClientModel clientModel;
+//	private ProductModel productModel;
+	
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(String orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-	public String getClientName() {
-		return clientName;
-	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 	public String getProductId() {
@@ -32,18 +55,50 @@ public class OrderModel {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	public String getDeliveryDate() {
+	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
-	public void setDeliveryDate(String deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	public Integer getClientId() {
+		return clientId;
+	}
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	
+	/*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "clientId")
+	public ClientModel getClientModel() {
+		return clientModel;
+	}
+	public void setClientModel(ClientModel clientModel) {
+		this.clientModel = clientModel;
+	}*/
+	
+	/*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "productId")
+	public ProductModel getProductModel() {
+		return productModel;
+	}
+	public void setProductModel(ProductModel productModel) {
+		this.productModel = productModel;
+	}*/
+	
+	
 	
 	
 }

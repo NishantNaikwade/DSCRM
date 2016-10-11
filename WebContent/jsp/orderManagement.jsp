@@ -24,6 +24,7 @@
 
                     <tr>
                         <th>No</th>
+                        <th>New</th>
                         <th>In Progress</th>
                         <th>Completed</th>
                         <th>Delivered</th>
@@ -32,6 +33,7 @@
                 <tbody>
                         <tr>
                             <td class="info"><c:out value="${number}" /></td>
+                            <td class="info"><c:out value="${newOrderCount}" /></td>
                             <td class="warning"><c:out value="${inProgressCount}" /></td>
                             <td class="success"><c:out value="${completedCount}" /></td>
                             <td class="active"><c:out value="${deliveredCount}" /></td>
@@ -48,17 +50,18 @@
                         <th>Product Id</th>
                         <th>Delivery Date</th>
                         <th>Quantity</th>
+                        <th>Create Time</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${orderList}" var="order">
                         <tr class="<c:out value="${order.status}" />">
                             <td><c:out value="${order.orderId}" /></td>
-                            <td><c:out value="${order.clientName}" /></td>
+                            <td><c:out value="${order.clientId}" /></td>
                             <td><c:out value="${order.productId}" /></td>
                             <td><c:out value="${order.deliveryDate}" /></td>
                             <td><c:out value="${order.quantity}" /></td>
-                            
+                            <td><c:out value="${order.createTime}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>

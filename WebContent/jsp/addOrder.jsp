@@ -3,7 +3,7 @@
 	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -21,21 +21,21 @@
 		<div class="add-order">
 			<div class="add-order-container">
 				<div>
-					<label>Client Name</label> <select>
+					<label>Client Name</label> 
+					<select name="clientId">
 						<option>Select</option>
-						<option>NexTech Services Private Limited</option>
-						<option>HAIER</option>
-						<option>LG</option>
-						<option>SAMSUNG</option>
+						<c:forEach items="${clientList}" var="client">
+						<option value="<c:out value="${client.id}" />"><c:out value="${client.name}" /></option>
+						</c:forEach>
 					</select>
 				</div>
 				<div>
-					<label>Product Id</label> <select>
+					<label>Product Id</label> 
+					<select name="productId">
 						<option>Select</option>
-						<option>PR00001</option>
-						<option>PR00002</option>
-						<option>PR00003</option>
-						<option>PR00004</option>
+						<c:forEach items="${productList}" var="product">
+						<option value="<c:out value="${product.id}" />"><c:out value="${product.name}" /></option>
+						</c:forEach>
 					</select>
 				</div>
 				<div>
@@ -43,7 +43,7 @@
 						style="padding: 10px; margin: 5px;" name="quantity">
 				</div>
 				<div>
-					<label>Delivery Date</label> <input type="text"
+					<label>Delivery Date</label> <input type="date"
 						style="padding: 10px; margin: 5px;" name="deliveryDate">
 				</div>
 				<input type="submit" class="btn btn-lg btn-block btn-warning"id="loginSaveUserRequest"

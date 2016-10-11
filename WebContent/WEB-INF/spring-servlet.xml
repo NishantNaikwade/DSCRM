@@ -35,6 +35,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			    <value>com.nextech.dscrm.model.UserModel</value>
 				<value>com.nextech.dscrm.model.LoginUserRequest</value>
 				<value>com.nextech.dscrm.model.UserRequest</value>
+				<value>com.nextech.dscrm.model.OrderModel</value>
+				<value>com.nextech.dscrm.model.ClientModel</value>
+				<value>com.nextech.dscrm.model.ProductModel</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -81,6 +84,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="loginUserRequestServiceImpl" class="com.nextech.dscrm.services.LoginUserRequestServiceImpl" />
 	<bean id="userDaoImpl" class="com.nextech.dscrm.dao.UserDAOImpl" />
     <bean id="userServiceImpl" class="com.nextech.dscrm.services.UserServiceImpl" />
-
+    <bean id="orderDaoImpl" class="com.nextech.dscrm.dao.OrderDAOImpl" />
+	<bean id="orderServiceImpl" class="com.nextech.dscrm.services.OrderServiceImpl" />
+	<bean id="clientDaoImpl" class="com.nextech.dscrm.dao.ClientDAOImpl" />
+	<bean id="clientServiceImpl" class="com.nextech.dscrm.services.ClientServiceImpl" />
+	<bean id="productDaoImpl" class="com.nextech.dscrm.dao.ProductDAOImpl" />
+	<bean id="productServiceImpl" class="com.nextech.dscrm.services.ProductServiceImpl" />
 	<mvc:annotation-driven />
 </beans>  
